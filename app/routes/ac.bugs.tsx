@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function ACBugs() {
-  const [data, setData] = useState<Bug[]>([]);
+  const [data, setData] = useState<Bug[]>(bugs);
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedMonths, setSelectedMonths] = useState<number[]>([]);
   const [caughtBugs, setCaughtBugs, removeCaughtBugs] = useLocalStorage<
@@ -24,26 +24,26 @@ export default function ACBugs() {
     number[]
   >("AC-donatedBugs", []);
 
-  useEffect(() => {
-    setData(bugs);
-  });
-
   // Filter bugs based on selected time and months
-  if (selectedTime) {
-    const filteredData = data.filter((bug: Bug) => {
-      return bug.time.some(
-        (t) => selectedTime >= t.from && selectedTime <= t.to
-      );
-    });
-    setData(filteredData);
-  }
+  useEffect(() => {
+    let filteredData = bugs;
 
-  if (selectedMonths.length > 0) {
-    const filteredData = data.filter((bug: Bug) =>
-      selectedMonths.some((month) => bug.months.includes(month))
-    );
+    if (selectedTime) {
+      filteredData = filteredData.filter((bug: Bug) => {
+        return bug.time.some(
+          (t) => selectedTime >= t.from && selectedTime <= t.to
+        );
+      });
+    }
+
+    if (selectedMonths.length > 0) {
+      filteredData = filteredData.filter((bug: Bug) =>
+        selectedMonths.some((month) => bug.months.includes(month))
+      );
+    }
+
     setData(filteredData);
-  }
+  }, [selectedTime, selectedMonths]);
 
   return (
     <div>

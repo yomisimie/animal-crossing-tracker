@@ -7,7 +7,7 @@ export default function Index() {
         <div className="h-[200px]">
           <Link to="/">
             <img
-              src="/logo.png"
+              src="./logo.png"
               alt="Animal Crossing Tracker"
               className="block h-full w-auto"
             />
