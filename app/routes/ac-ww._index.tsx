@@ -1,4 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,13 +8,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+export default function ACWW() {
   return (
     <div>
       <div className="flex py-5">
-        <a href="/" className="btn btn-primary">
+        <Link to="/" className="btn btn-primary">
           <i className="icon-arrow-left"></i>
-        </a>
+        </Link>
         <h1 className="mx-auto text-center text-3xl font-[FinkHeavy] text-primary self-center">
           Animal Crossing: Wild World (NDS)
         </h1>
@@ -21,34 +22,34 @@ export default function Index() {
       <nav className="flex flex-col items-center justify-center gap-2 rounded-3xl border p-6 max-w-xs mx-auto border-gray-700">
         <ul className="w-full my-2">
           <li key="ac-ww/bugs" className="my-2">
-            <a
+            <Link
               className="flex items-center gap-3 self-stretch p-2 btn btn-primary"
-              href="ac-ww/bugs"
+              to="ac-ww/bugs"
               rel="noreferrer"
             >
               <i className="icon-bug-net text-2xl"></i>
               Bugs
-            </a>
+            </Link>
           </li>
           <li key="ac-ww/fish" className="my-2">
-            <a
+            <Link
               className="flex items-center gap-3 self-stretch p-2 btn btn-primary"
-              href="ac-ww/fish"
+              to="ac-ww/fish"
               rel="noreferrer"
             >
               <i className="icon-fishing-pole text-2xl"></i>
               Fish
-            </a>
+            </Link>
           </li>
           <li key="ac-ww/fossils" className="my-2">
-            <a
+            <Link
               className="flex items-center gap-3 self-stretch p-2 btn btn-primary"
-              href="ac-ww/fossils"
+              to="ac-ww/fossils"
               rel="noreferrer"
             >
               <i className="icon-fossil text-2xl"></i>
               Fossils
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -1,16 +1,26 @@
-import { LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useEffect, useState } from "react";
 
-export let loader: LoaderFunction = async () => {
-    return { message: "Hello from Animal Crossing Tracker!" };
-};
+export default function ACNHIndex() {
+  const [data, setData] = useState<{ message: string } | null>(null);
 
-export default function Index() {
-    let data = useLoaderData();
+  useEffect(() => {
+    // Simulate fetching data
+    const fetchData = async () => {
+      const response = await fetch("/api/message");
+      const result = await response.json();
+      setData(result);
+    };
 
-    return (
-        <div>
-            <h1>{data.message}</h1>
-        </div>
-    );
+    fetchData();
+  }, []);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h1>{data.message}</h1>
+    </div>
+  );
 }

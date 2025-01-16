@@ -1,17 +1,17 @@
-import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export default function Index() {
   return (
     <div className="flex flex-col items-center gap-10">
       <header className="flex flex-col items-center gap-9">
         <div className="h-[200px]">
-          <a href="/">
+          <Link to="/">
             <img
               src="/logo.png"
               alt="Animal Crossing Tracker"
               className="block h-full w-auto"
             />
-          </a>
+          </Link>
         </div>
         <h1 className="leading text-5xl font-bold font-[FinkHeavy]">Tracker</h1>
       </header>
@@ -19,14 +19,14 @@ export default function Index() {
         <ul>
           {resources.map(({ href, text, icon }) => (
             <li key={href} className="my-2">
-              <a
+              <Link
                 className="flex items-center gap-3 self-stretch p-2 btn btn-primary"
-                href={href}
+                to={href}
                 rel="noreferrer"
               >
                 {icon}
                 {text}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

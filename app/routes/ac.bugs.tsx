@@ -1,14 +1,10 @@
-import { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 import bugs from "json/ac/bugs.json";
 import months from "json/months.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import Bug from "~/types/Bug";
-
-export let loader: LoaderFunction = async () => {
-  return bugs;
-};
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,7 +13,8 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
+export default function ACBugs() {
+  const [data, setData] = useState<Bug[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedMonths, setSelectedMonths] = useState<number[]>([]);
   const [caughtBugs, setCaughtBugs, removeCaughtBugs] = useLocalStorage<
@@ -27,28 +24,33 @@ export default function Index() {
     number[]
   >("AC-donatedBugs", []);
 
-  let data = useLoaderData<typeof loader>();
+  useEffect(() => {
+    setData(bugs);
+  });
+
   // Filter bugs based on selected time and months
   if (selectedTime) {
-    data = data.filter((bug: Bug) => {
+    const filteredData = data.filter((bug: Bug) => {
       return bug.time.some(
         (t) => selectedTime >= t.from && selectedTime <= t.to
       );
     });
+    setData(filteredData);
   }
 
   if (selectedMonths.length > 0) {
-    data = data.filter((bug: Bug) =>
+    const filteredData = data.filter((bug: Bug) =>
       selectedMonths.some((month) => bug.months.includes(month))
     );
+    setData(filteredData);
   }
 
   return (
     <div>
       <div className="flex py-4 border-neutral-500 border-opacity-25 border-b-2">
-        <a href="/ac" className="btn btn-primary">
+        <Link to="/ac" className="btn btn-primary">
           <i className="icon-arrow-left"></i>
-        </a>
+        </Link>
         <h1 className="mx-auto text-center text-3xl font-[FinkHeavy] text-primary self-center">
           Bugs (GCN)
         </h1>

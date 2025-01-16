@@ -9,8 +9,11 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  base: "/AnimalCrossingTracker",
   plugins: [
     remix({
+      basename: "/AnimalCrossingTracker",
+      ssr: false,
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
