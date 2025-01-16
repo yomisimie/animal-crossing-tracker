@@ -9,6 +9,7 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import { useLocalStorage } from "usehooks-ts";
 
 import "./tailwind.css";
+import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -69,8 +70,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [selectedTheme, setSelectedTheme, removeSelectedTheme] =
     useLocalStorage("theme", "halloween");
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", selectedTheme);
+  }, []);
+
   return (
-    <html lang="en" data-theme={selectedTheme}>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
