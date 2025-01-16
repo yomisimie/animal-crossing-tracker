@@ -58,12 +58,6 @@ const themes = [
   "sunset",
 ];
 
-// const [selectedTheme, setSelectedTheme, removeSelectedTheme] = useLocalStorage(
-//   "theme",
-//   "halloween"
-// );
-const selectedTheme = "halloween";
-
 export const meta: MetaFunction = () => {
   return [
     { title: "Animal Crossing Tracker" },
@@ -72,6 +66,9 @@ export const meta: MetaFunction = () => {
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [selectedTheme, setSelectedTheme, removeSelectedTheme] =
+    useLocalStorage("theme", "halloween");
+
   return (
     <html lang="en" data-theme={selectedTheme}>
       <head>
@@ -108,6 +105,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     className="btn theme-controller join-item"
                     aria-label={theme}
                     value={theme}
+                    onChange={(e) => setSelectedTheme(e.target.value)}
                   />
                 </li>
               ))}
