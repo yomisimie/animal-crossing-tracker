@@ -20,3 +20,9 @@ body {
     color-scheme: dark;
   } */
 }
+
+@layer components {
+  .pixelated {
+    image-rendering: pixelated
+  }
+}

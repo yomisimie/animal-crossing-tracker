@@ -1,32 +1,32 @@
 import Time from "./Time";
 
-export default class Bug {
+export default class Fish {
   id: number;
   name: string;
+  price: string;
   location: string;
-  price: number;
+  shadowSize: string;
   time: Time[];
   months: number[];
   image: string;
-  weather: string;
 
   constructor(
     id: number,
     name: string,
+    price: string,
     location: string,
-    price: number,
+    shadowSize: string,
     time: Time[],
     months: number[],
-    image: string,
-    weather: string
+    image: string
   ) {
-    this.image = image;
     this.id = id;
     this.name = name;
-    this.location = location;
     this.price = price;
+    this.location = location;
+    this.shadowSize = shadowSize;
     this.time = time;
-    this.weather = weather;
     this.months = months;
+    this.image = image;
   }
 }
